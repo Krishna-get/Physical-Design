@@ -31,95 +31,95 @@ Both folders are complete and directly runnable with:
 # 1. Setup Instructions
 Prerequisites
 
-Linux (Ubuntu recommended)
+- Linux (Ubuntu recommended)
 
-Docker installed
+- Docker installed
 
-OpenLane installed (or use the official Docker image)
+- OpenLane installed (or use the official Docker image)
 
-Sky130A PDK installed (OpenLane downloads it automatically on first use)
+- Sky130A PDK installed (OpenLane downloads it automatically on first use)
 
-Enter the OpenLane environment:
-
+## Enter the OpenLane environment:
+```bash
 cd /openlane
 make mount
+```
+# 2. Running the Full Flow
+## Full Adder (fa)
 
-2. Running the Full Flow
-Full Adder (fa)
-
-Run the full RTL to GDS flow:
-
+- Run the full RTL to GDS flow:
+```bash
 ./flow.tcl -design fa -tag run1 -overwrite
+```
 
+### The following steps run automatically:
 
-The following steps run automatically:
+- Synthesis
 
-Synthesis
+- Static Timing Analysis
 
-Static Timing Analysis
+- Floorplanning
 
-Floorplanning
+- PDN generation
 
-PDN generation
+- Placement
 
-Placement
+- Clock Tree Synthesis
 
-Clock Tree Synthesis
+- Routing
 
-Routing
+- Magic DRC
 
-Magic DRC
+- LVS
 
-LVS
+- GDS export
 
-GDS export
-
-Results are located at:
-
+### Results are located at:
+```bash
 designs/fa/runs/run1/
+```
+### fa Design Description
 
-fa Design Description
+- RTL (fa.v)
+- A synchronous 1-bit full adder with one pipeline stage.
 
-RTL (fa.v)
-A synchronous 1-bit full adder with one pipeline stage.
+- Inputs: clk, a, b, cin
+- Outputs: sum, cout
 
-Inputs: clk, a, b, cin
-Outputs: sum, cout
+### config.tcl notes
 
-config.tcl notes
+- `CLOCK_PORT = clk, CLOCK_PERIOD = 10ns`
 
-CLOCK_PORT = clk, CLOCK_PERIOD = 10ns
+- `Die area set to 50 × 50 microns`
 
-Die area set to 50 × 50 microns
+- `PDN auto-adjust disabled`
 
-PDN auto-adjust disabled
+- `CTS and STA enabled`
 
-CTS and STA enabled
+- `Magic, LVS, and GDS export enabled`
 
-Magic, LVS, and GDS export enabled
-
-3. Running the Kogge–Stone Adder (ks_adder)
+# 3. Running the Kogge–Stone Adder (ks_adder)
+```bash
 ./flow.tcl -design ks_adder -tag run1 -overwrite
-
-
-Results are located at:
-
+```
+###  Results are located at:
+```bash
 designs/ks_adder/runs/run1/
+```
+### ks_adder Design Description
 
-ks_adder Design Description
+- RTL (ks_adder.v)
+- A multi-bit Kogge–Stone parallel prefix adder.
+- Synchronous version with a real clock input.
 
-RTL (ks_adder.v)
-A multi-bit Kogge–Stone parallel prefix adder.
-Synchronous version with a real clock input.
+### config.tcl notes
 
-config.tcl notes
+- `CLOCK_PORT = clk, CLOCK_PERIOD = 10ns`
 
-CLOCK_PORT = clk, CLOCK_PERIOD = 10ns
+- `Die area set to 80 × 80 microns (adjust based on bit width)`
 
-Die area set to 80 × 80 microns (adjust based on bit width)
+- `CTS and STA enabled`
 
-CTS and STA enabled
+- `PDN pitch fixed for reliability`
 
-PDN pitch fixed for reliability
-
-Magic, LVS, and GDS export enabled
+- `Magic, LVS, and GDS export enabled`
