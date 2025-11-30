@@ -1,0 +1,64 @@
+## Install Ubuntu
+
+---
+
+## Run this on the terminal
+
+```bash
+# --------------------- UPDATE SYSTEM ---------------------
+sudo apt update
+
+# --------------------- INSTALL BASE TOOLS ---------------------
+sudo apt install -y \
+    build-essential \
+    python3 \
+    python3-venv \
+    python3-pip \
+    git \
+    make \
+    curl \
+    ca-certificates \
+    gnupg \
+    lsb-release \
+    tcllib \
+    gedit
+
+# --------------------- REMOVE OLD DOCKER ---------------------
+sudo apt remove -y docker docker-engine docker.io containerd runc || true
+
+# --------------------- ADD DOCKER APT SOURCE ---------------------
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+    sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) \
+signed-by=/etc/apt/keyrings/docker.gpg] \
+https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+
+# --------------------- INSTALL DOCKER ---------------------
+sudo apt install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-compose-plugin
+
+# --------------------- ENABLE DOCKER WITHOUT SUDO ---------------------
+sudo groupadd docker 2>/dev/null || true
+sudo usermod -aG docker $USER
+
+echo
+echo "-----------------------------"
+echo "REBOOT NOW for Docker group"
+echo "After reboot, run ONLY the commands below:"
+echo "-----------------------------"
+echo "
+cd \$HOME
+git clone --depth 1 https://github.com/The-OpenROAD-Project/OpenLane.git
+cd OpenLane
+make
+"
