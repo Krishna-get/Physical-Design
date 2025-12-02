@@ -27,7 +27,11 @@ Both folders are complete and directly runnable with:
 ```bash
 ./flow.tcl -design <design_name> -tag run1 -overwrite
 ```
+To add your design:
 
+```bash
+./flow.tcl -design <design_name> -init_design_config -add_to_designs -config_file config.tcl
+```
 # 1. Setup Instructions
 Prerequisites
 
