@@ -8,8 +8,6 @@
 #  - Clock uncertainty
 #  - Input transition times
 #  - Reset as a false path
-#
-# Each line is commented so students can understand why the constraint exists.
 # ==============================================================================
 
 
