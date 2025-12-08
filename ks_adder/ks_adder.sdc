@@ -15,13 +15,13 @@ set CLOCK_RECONV_NS         0.03      ;# reconvergence estimate
 
 # Input / output external delays (ns)
 set INPUT_DELAY_MAX_NS      0.5
-set INPUT_DELAY_MIN_NS      0.0
+set INPUT_DELAY_MIN_NS      0.2
 set OUTPUT_DELAY_MAX_NS     0.5
-set OUTPUT_DELAY_MIN_NS     0.0
+set OUTPUT_DELAY_MIN_NS     0.2
 
 # Clock latencies (ns)
-set CLK_SOURCE_LATENCY_NS    0.0
-set CLK_INSERTION_LATENCY_NS 0.0
+set CLK_SOURCE_LATENCY_NS    0.1
+set CLK_INSERTION_LATENCY_NS 0.1
 ###################################################################
 
 # --------------------- DO NOT EDIT BELOW --------------------------
